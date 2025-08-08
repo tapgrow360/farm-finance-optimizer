@@ -1,0 +1,266 @@
+/* Main container and section sizing */
+.main .block-container {
+    max-width: 100% !important;
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+    padding-top: 0.5rem !important;
+}
+
+/* Mobile-first approach - extreme sizing for tiny screens */
+@media screen and (max-width: 375px) {
+    /* Tiny screen handling */
+    .main .block-container {
+        padding-left: 0.3rem !important;
+        padding-right: 0.3rem !important;
+        padding-top: 0.3rem !important;
+        max-width: 95% !important;
+    }
+    
+    /* Make headings smaller */
+    h1, h2, h3, h4, h5, h6 {
+        font-size: 90% !important;
+        margin: 0.3rem 0 !important;
+        padding: 0 !important;
+    }
+    
+    /* Make text smaller */
+    p, div, span {
+        font-size: 80% !important;
+        line-height: 1.2 !important;
+        margin: 0.2rem 0 !important;
+    }
+    
+    /* Make metric cards smaller */
+    [data-testid="stMetric"] {
+        padding: 0.2rem !important;
+        margin: 0.2rem 0 !important;
+    }
+    
+    [data-testid="stMetricLabel"] {
+        font-size: 70% !important;
+    }
+    
+    [data-testid="stMetricValue"] {
+        font-size: 90% !important;
+    }
+    
+    /* More space-efficient expanders */
+    [data-testid="stExpander"] {
+        padding: 0.3rem !important;
+        margin: 0.3rem 0 !important;
+    }
+    
+    /* Adjust sidebar width */
+    [data-testid="stSidebar"] {
+        min-width: 0px !important;
+        width: 160px !important;
+        max-width: 160px !important;
+    }
+    
+    /* Reduce sidebar padding */
+    [data-testid="stSidebar"] > div:first-child {
+        padding: 0.5rem 0.3rem !important;
+    }
+    
+    /* Smaller input fields */
+    [data-testid="stNumberInput"] {
+        margin: 0.3rem 0 !important;
+    }
+    
+    /* Compress dividers */
+    hr {
+        margin: 0.3rem 0 !important;
+    }
+    
+    /* Make tables ultra compact using left margin space */
+    [data-testid="stTable"] {
+        font-size: 50% !important;
+        transform: scale(0.9) !important;
+        transform-origin: left top !important;
+        margin-bottom: -20px !important;
+        margin-left: -30% !important;  /* Use space on left side */
+        margin-right: -10% !important;
+        overflow-x: hidden !important;  /* Prevent horizontal scroll */
+        display: block !important;
+        width: 140% !important;        /* Make wider to use entire screen width */
+    }
+    
+    /* Extreme table cell shrinking */
+    [data-testid="stTable"] td {
+        padding: 0 !important;
+        line-height: 0.8 !important;
+        max-width: 45px !important;     /* Limit cell width */
+        min-width: 15px !important;     /* Ensure minimum cell width */
+        font-size: 97% !important;      /* Slightly bigger text */
+        white-space: normal !important; /* Allow text wrapping in cells */
+        word-break: break-all !important; /* Force word breaks */
+        overflow-wrap: break-word !important;
+    }
+    
+    /* Make table headers more compact */
+    [data-testid="stTable"] th {
+        padding: 0 !important;
+        line-height: 0.8 !important;
+        background-color: #f0f2f6 !important;
+        font-weight: 500 !important;
+        white-space: normal !important;
+        word-wrap: break-word !important;
+        max-width: 40px !important;
+        min-width: 15px !important;
+        overflow-wrap: break-word !important;
+        font-size: 95% !important;
+        word-break: break-all !important;
+    }
+    
+    /* Force table to fit screen width */
+    [data-testid="stTable"] table {
+        table-layout: fixed !important;  /* Force equal column widths */
+        width: 100% !important;
+    }
+    
+    /* Hide version info */
+    footer {
+        display: none !important;
+    }
+    
+    /* Reduce chart heights */
+    [data-testid="stPlotlyChart"] {
+        max-height: 200px !important;
+    }
+    
+    /* Optimize download buttons */
+    button[data-testid="baseButton-secondary"] {
+        padding: 0.2rem 0.5rem !important;
+        font-size: 70% !important;
+        min-height: 30px !important;
+    }
+    
+    /* Optimize logos for tiny screens */
+    .logo-container img {
+        max-width: 80% !important;
+        width: 200px !important;
+        height: auto !important;
+        transform: scale(0.6) !important;
+        transform-origin: center top !important;
+        margin: -15px auto -25px auto !important;
+    }
+    
+    /* Ultra compact layout */
+    .stPlotlyChart > div {
+        min-height: 150px !important;
+    }
+    
+    /* Optimize inputs sidebar section */
+    .inputs-toggle {
+        font-size: 10px !important;
+        padding: 0.25rem 0.5rem !important;
+        margin: 0.25rem !important;
+    }
+}
+
+/* Special classes for buttons */
+.inputs-toggle {
+    color: white;
+    background-color: #1a5ebe;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    margin: 0.5rem 0;
+    font-weight: 500;
+    cursor: pointer;
+    display: inline-block;
+}
+
+/* Scenario comparison specific styles */
+.scenario-subheader {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 10px 0 5px 0;
+    color: #1a5ebe;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #eee;
+}
+
+/* Extreme adjustments for ultra-small screens */
+@media screen and (max-width: 320px) {
+    /* Even smaller for iPhone 5/SE sizes */
+    .main .block-container {
+        padding-left: 0.1rem !important;
+        padding-right: 0.1rem !important;
+        max-width: 99% !important;
+    }
+    
+    /* Shrink logo even more */
+    .logo-container img {
+        transform: scale(0.4) !important;
+        margin: -30px auto -35px auto !important;
+    }
+    
+    /* Make charts even smaller */
+    [data-testid="stPlotlyChart"] {
+        max-height: 120px !important;
+    }
+    
+    /* Extremely compact inputs */
+    [data-testid="stNumberInput"] {
+        transform: scale(0.8) !important;
+        transform-origin: left center !important;
+    }
+    
+    /* Remove all margins around sections */
+    div.stSection > div {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
+    /* Ultra-tiny tables using left margin space */
+    [data-testid="stTable"] {
+        font-size: 45% !important;
+        transform: scale(0.7) !important;
+        margin-left: -40% !important; /* Use space on left side */
+        margin-right: -10% !important;
+        width: 150% !important;
+        margin-bottom: -40px !important;
+        overflow-x: hidden !important;
+    }
+    
+    /* Even smaller wrapped headers for ultra tiny screens */
+    [data-testid="stTable"] th {
+        font-size: 42% !important;
+        white-space: normal !important;
+        max-width: 35px !important;
+        min-width: 15px !important;
+        line-height: 0.8 !important;
+        word-break: break-all !important;
+    }
+    
+    /* Minimize cell content for ultra-small screens */
+    [data-testid="stTable"] td {
+        font-size: 45% !important;
+        max-width: 35px !important;
+        min-width: 15px !important;
+        white-space: normal !important;
+        word-break: break-all !important;
+    }
+    
+    /* Minimal text */
+    p, div, span {
+        font-size: 75% !important;
+        line-height: 1.1 !important;
+    }
+    
+    /* Tiny headers */
+    h1, h2, h3, h4, h5, h6 {
+        font-size: 80% !important;
+    }
+    
+    /* Reduce whitespace everywhere */
+    .block-container > div > div {
+        gap: 0.3rem !important;
+    }
+    
+    /* Super-small column spacing */
+    div.row-widget.stHorizontal {
+        gap: 0 !important;
+    }
+}
