@@ -7,7 +7,7 @@ import os
 import io
 import datetime
 import jinja2
-from weasyprint import HTML
+from reportlab.pdfgen import canvas
 import xlsxwriter
 
 def create_fallback_data():
