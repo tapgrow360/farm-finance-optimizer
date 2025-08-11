@@ -124,7 +124,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Render the original logo with enhanced CSS for crispness
-# logo_base64 = base64.b64encode(open("./attached_assets/Original Logo_1754603028196.png", "rb").read()).decode()
+logo_base64 = ""  # Empty string for now
 st.markdown(f"""
 <div class="logo-container" style="text-align: center; margin: -50px auto -80px auto; padding-top: 0; position: relative; top: -40px;">
     <img src="data:image/png;base64,{logo_base64}" 
