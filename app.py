@@ -4,6 +4,25 @@ import plotly.express as px
 import plotly.graph_objects as go
 import numpy as np
 import os
+import streamlit as st
+import pandas as pd
+
+# Better CSV loading with error handling
+csv_path = "attached_assets/AgriCommand2 Demo - Corn.csv"
+
+try:
+    if os.path.exists(csv_path):
+        df = pd.read_csv(csv_path)
+        st.success("Data loaded successfully!")
+    else:
+        # Try alternative path
+        alt_path = "./attached_assets/AgriCommand2 Demo - Corn.csv"
+        df = pd.read_csv(alt_path)
+        st.success("Data loaded successfully!")
+except Exception as e:
+    st.error(f"Could not load CSV file: {e}")
+    # Create dummy data so app still works
+    df = pd.DataFrame({"crop": ["Corn"], "acres": [100], "yield": [150]})
 import base64
 from utils import (
     calculate_profit_per_acre, 
