@@ -168,7 +168,7 @@ st.markdown("""
 
 # Sidebar for navigation and inputs
 # Add small logo in sidebar
-small_logo_base64 = base64.b64encode(open("attached_assets/Transparent Logo_1754605512600.png", "rb").read()).decode()
+small_logo_base64 = ""  # Logo disabled temporarily
 st.sidebar.markdown(f"""
 <div style="text-align: center; margin-bottom: 10px;">
     <img src="data:image/png;base64,{small_logo_base64}" 
