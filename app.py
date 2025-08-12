@@ -6,7 +6,8 @@ import numpy as np
 import os
 import streamlit as st
 import pandas as pd
-
+import pandas as pd
+df = pd.read_csv("attached_assets/AgriCommand2 Demo - Corn.csv")
 # Better CSV loading with error handling
 csv_path = "attached_assets/AgriCommand2 Demo - Corn.csv"
 
