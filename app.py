@@ -7,7 +7,28 @@ import os
 import streamlit as st
 import pandas as pd
 import pandas as pd
-df = pd.read_csv("attached_assets/AgriCommand2 Demo - Corn.csv")
+import streamlit as st
+import pandas as pd
+
+# Your other imports here...
+
+def load_data():
+    """Load the CSV data"""
+    try:
+        return pd.read_csv("attached_assets/AgriCommand2 Demo - Corn.csv")
+    except FileNotFoundError:
+        st.error("Demo data file not found. Using sample data.")
+        # Return sample data so app still works
+        return pd.DataFrame({
+            'Crop': ['Corn'],
+            'Region': ['Midwest'], 
+            'Acres': [100],
+            'Yield': [150]
+        })
+
+# Later in your code, when you actually need the data:
+if st.button("Load Data") or 'df' not in st.session_state:
+    st.session_state.df = load_data()
 # Better CSV loading with error handling
 csv_path = "attached_assets/AgriCommand2 Demo - Corn.csv"
 
