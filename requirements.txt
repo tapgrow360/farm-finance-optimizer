@@ -4,3 +4,4 @@ numpy
 pulp
 plotly
 gspread
+reportlab
