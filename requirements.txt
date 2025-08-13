@@ -5,3 +5,4 @@ pulp
 plotly
 gspread
 reportlab
+xlsxwriter
