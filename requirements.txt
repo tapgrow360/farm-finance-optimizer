@@ -1,13 +1,5 @@
 streamlit
-plotly
 pandas
 numpy
-openpyxl
-gspread
-google-auth
-google-auth-oauthlib
-google-auth-httplib2
-oauth2client
-reportlab
-xlsxwriter
-Pillow
+pulp
+plotly
