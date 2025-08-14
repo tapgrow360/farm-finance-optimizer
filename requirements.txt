@@ -6,3 +6,4 @@ plotly
 gspread
 reportlab
 xlsxwriter
+openpyxl
