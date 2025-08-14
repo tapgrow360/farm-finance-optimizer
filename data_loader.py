@@ -155,17 +155,4 @@ def load_csv_data(file_path):
         # Create regional cost data
         regional_costs = []
         for name, value in direct_costs.items():
-            regional_costs.append({'Region': 'Midwest', 'Cost_Item': name, 'Cost_Value': value})
-        for name, value in overhead_costs.items():
-            regional_costs.append({'Region': 'Midwest', 'Cost_Item': name, 'Cost_Value': value})
-        
-        regional_costs_df = pd.DataFrame(regional_costs)
-        
-        additional_regions = ['Great Plains']
-        for region in additional_regions:
-            for name, value in direct_costs.items():
-                modified_value = value * 0.95
-                regional_costs.append({'Region': region, 'Cost_Item': name, 'Cost_Value': modified_value})
-            for name, value in overhead_costs.items():
-                modified_value = value * 0.95
-                regional_costs.append({'Region': region, 'Cost_Item': name, 'Cost_Value': modified_value})
+            regional
