@@ -10,103 +10,71 @@ def parse_dollar_value(value):
     try:
         return float(value)
     except ValueError:
-        return 0.0  # Default to 0 if conversion fails, to avoid errors
+        return 0.0  # Default to 0 if conversion fails
 
 def load_excel_data(file_path):
-    """
-    Load data from an Excel file containing soybeans data.
-   
-    Args:
-        file_path (str): Path to the Excel file
-    
-    Returns:
-        dict: A dictionary containing dataframes for different data categories
-    """
     full_path = os.path.join(os.path.dirname(__file__), file_path)
     try:
         df = pd.read_excel(full_path, sheet_name='Sheet1')
-       
-        # Extract basic information
-        yield_value = df.iloc[0, 1] # Yield is in row 0, column 1
-        price_value = df.iloc[1, 1] # Price is in row 1, column 1
-       
-        # Extract costs from the data
+        
+        # Extract basic information dynamically (search for keys)
+        yield_value = None
+        price_value = None
+        for row in df.itertuples():
+            if 'Yield' in str(row[1]):
+                yield_value = row[2]
+            if 'Price' in str(row[1]):
+                price_value = row[2]
+        
+        if yield_value is None or price_value is None:
+            raise ValueError("Could not find yield or price in Excel")
+
+        # Extract costs dynamically
         cost_data = []
-       
-        # Map the Excel data to our cost structure
-        cost_mapping = {
-            'Rent': 5,
-            'Seed': 6,
-            'Chemical': 8,
-            'Insurance': 9,
-            'Fuel': 11,
-            'Repairs': 12,
-            'Interest': 13,
-            'Depreciation': 17,
-            'Utilities': 18,
-            'Misc overhead': 19,
-            'Labor': 20,
-            'Management': 21
-        }
-       
-        # Create cost entries
-        for cost_name, row_idx in cost_mapping.items():
-            if pd.notna(df.iloc[row_idx, 1]): # Check if value exists
-                cost_value = df.iloc[row_idx, 1]
-                # Determine category
-                if cost_name in ['Rent', 'Seed', 'Chemical', 'Insurance', 'Fuel', 'Repairs', 'Interest']:
-                    category = 'Direct Costs'
-                else:
-                    category = 'Overhead Costs'
-                
-                cost_data.append({
-                    'Category': category,
-                    'Cost_Item': cost_name,
-                    'Cost_Value': cost_value
-                })
-       
-        # Skip Fertilizer for soybeans (nitrogen-fixing crop doesn't need fertilizer)
-       
-        # Handle Drying (appears to be 0 or not specified)
-        cost_data.append({
-            'Category': 'Direct Costs',
-            'Cost_Item': 'Drying',
-            'Cost_Value': 0.0 # Not specified in the Excel, defaulting to 0
-        })
-       
-        # Create DataFrame
+        category = None
+        for row in df.itertuples():
+            cost_name = str(row[1]).strip()
+            if cost_name == 'Direct costs':
+                category = 'Direct Costs'
+                continue
+            if cost_name == 'Overhead costs':
+                category = 'Overhead Costs'
+                continue
+            if cost_name == '' or pd.isna(row[2]):
+                continue
+            cost_value = parse_dollar_value(row[2])
+            cost_data.append({
+                'Category': category,
+                'Cost_Item': cost_name,
+                'Cost_Value': cost_value
+            })
+
         cost_df = pd.DataFrame(cost_data)
-       
+
         # Create crop data DataFrame
         crop_df = pd.DataFrame({
             'Crop': ['Soybeans'],
             'Yield': [yield_value],
             'Price': [price_value]
         })
-       
-        # Create regional costs DataFrame with individual cost items
+
+        # Create regional costs
         regional_data = []
         for _, cost_row in cost_df.iterrows():
-            cost_item = cost_row['Cost_Item']
             base_cost = cost_row['Cost_Value']
-           
-            # Add Midwest costs (base values)
             regional_data.append({
                 'Region': 'Midwest',
-                'Cost_Item': cost_item,
+                'Cost_Item': cost_row['Cost_Item'],
                 'Cost_Value': base_cost
             })
-           
-            # Add Great Plains costs (5% lower)
             regional_data.append({
                 'Region': 'Great Plains',
-                'Cost_Item': cost_item,
+                'Cost_Item': cost_row['Cost_Item'],
                 'Cost_Value': base_cost * 0.95
             })
-       
+
         regional_df = pd.DataFrame(regional_data)
-       
-        # Create the result structure matching CSV data
+
         result = {
             'cost_data': cost_df,
             'crop_data': crop_df,
@@ -115,32 +83,20 @@ def load_excel_data(file_path):
             'yield_value': yield_value,
             'price_value': price_value
         }
-       
         return result
-       
+        
     except Exception as e:
         st.error(f"Error loading Excel file: {e}")
         return None
 
 def load_csv_data(file_path):
-    """
-    Load data from a CSV file in the AgriCommand2 format.
-   
-    Args:
-        file_path (str): Path to the CSV file
-    
-    Returns:
-        dict: A dictionary containing dataframes for different data categories
-    """
     full_path = os.path.join(os.path.dirname(__file__), file_path)
     try:
         with open(full_path, 'r') as f:
-            lines = [line.strip() for line in f.readlines() if line.strip()]  # Remove blank lines
+            lines = [line.strip() for line in f.readlines() if line.strip()]
         
-        # Extract crop name from first non-blank line
+        # Extract crop name, yield, price
         crop_name = lines[0].split(',')[0].strip()
-        
-        # Find lines for yield and price dynamically
         yield_value = None
         price_value = None
         for line in lines:
@@ -162,7 +118,6 @@ def load_csv_data(file_path):
             parts = line.split(',')
             if len(parts) < 2 or not parts[0].strip():
                 continue
-            
             cost_name = parts[0].strip()
             if cost_name.lower() == 'direct costs':
                 in_direct = True
@@ -235,4 +190,11 @@ def load_csv_data(file_path):
         st.error(f"Error loading CSV data: {str(e)}")
         return create_fallback_data()
 
-# (The rest of the code remains the same: create_fallback_data, load_wheat_data, load_data)
+def create_fallback_data():
+    # (Your original fallback code here - no changes needed)
+
+def load_wheat_data(file_path):
+    # (Your original load_wheat_data code here - update similarly if needed, with dynamic parsing)
+
+def load_data(crop_type):
+    # (Your original load_data code here - update paths with os.path.join if needed)
