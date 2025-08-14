@@ -155,4 +155,206 @@ def load_csv_data(file_path):
         # Create regional cost data
         regional_costs = []
         for name, value in direct_costs.items():
-            regional
+            regional_costs.append({'Region': 'Midwest', 'Cost_Item': name, 'Cost_Value': value})
+        for name, value in overhead_costs.items():
+            regional_costs.append({'Region': 'Midwest', 'Cost_Item': name, 'Cost_Value': value})
+        
+        regional_costs_df = pd.DataFrame(regional_costs)
+        
+        additional_regions = ['Great Plains']
+        for region in additional_regions:
+            for name, value in direct_costs.items():
+                modified_value = value * 0.95
+                regional_costs.append({'Region': region, 'Cost_Item': name, 'Cost_Value': modified_value})
+            for name, value in overhead_costs.items():
+                modified_value = value * 0.95
+                regional_costs.append({'Region': region, 'Cost_Item': name, 'Cost_Value': modified_value})
+        
+        regional_costs_df = pd.DataFrame(regional_costs)
+        
+        additional_crops = [
+            {'Crop': 'Soybeans', 'Avg_Yield': 60, 'Current_Price': 13.50},
+            {'Crop': 'Wheat', 'Avg_Yield': 75, 'Current_Price': 7.00}
+        ]
+        
+        for crop in additional_crops:
+            crop_df = pd.concat([crop_df, pd.DataFrame([crop])], ignore_index=True)
+        
+        return {
+            'crop_data': crop_df,
+            'cost_data': cost_data,
+            'regional_costs': regional_costs_df
+        }
+        
+    except Exception as e:
+        st.error(f"Error loading CSV data: {str(e)}")
+        return create_fallback_data()
+
+def create_fallback_data():
+    """Create sample data structure to use when CSV loading fails."""
+    # Sample crop data
+    crop_data = pd.DataFrame({
+        'Crop': ['Corn', 'Soybeans', 'Wheat'],
+        'Avg_Yield': [180, 60, 75],
+        'Current_Price': [4.25, 13.50, 7.00]
+    })
+   
+    # Sample cost categories
+    cost_data = pd.DataFrame({
+        'Category': ['Direct Costs', 'Direct Costs', 'Direct Costs', 'Direct Costs',
+                    'Direct Costs', 'Direct Costs', 'Direct Costs', 'Direct Costs',
+                    'Direct Costs', 'Overhead Costs', 'Overhead Costs', 'Overhead Costs',
+                    'Overhead Costs', 'Overhead Costs'],
+        'Cost_Item': ['Rent', 'Seed', 'Fertilizer', 'Chemical', 'Insurance',
+                      'Drying', 'Fuel', 'Repairs', 'Interest',
+                      'Depreciation', 'Utilities', 'Misc overhead', 'Labor', 'Management']
+    })
+   
+    # Sample regional cost data
+    regions = ['Midwest', 'Great Plains']
+    cost_items = cost_data['Cost_Item'].tolist()
+   
+    regional_rows = []
+    for region in regions:
+        for item in cost_items:
+            # Generate a reasonable cost based on the item
+            if item == 'Rent':
+                base_cost = 190.0
+            elif item == 'Seed':
+                base_cost = 118.0
+            elif item == 'Fertilizer':
+                base_cost = 152.64
+            elif item == 'Chemical':
+                base_cost = 50.41
+            elif item == 'Insurance':
+                base_cost = 16.20
+            elif item == 'Drying':
+                base_cost = 10.0
+            elif item == 'Fuel':
+                base_cost = 20.0
+            elif item == 'Repairs':
+                base_cost = 30.0
+            elif item == 'Interest':
+                base_cost = 12.0
+            elif item == 'Depreciation':
+                base_cost = 75.0
+            elif item == 'Utilities':
+                base_cost = 20.0
+            elif item == 'Misc overhead':
+                base_cost = 27.0
+            elif item == 'Labor':
+                base_cost = 10.0
+            elif item == 'Management':
+                base_cost = 50.0
+            else:
+                base_cost = 25.0
+           
+            # Apply regional variations
+            if region == 'Great Plains':
+                cost = base_cost * 0.95
+            else:
+                cost = base_cost
+               
+            regional_rows.append({
+                'Region': region,
+                'Cost_Item': item,
+                'Cost_Value': cost
+            })
+   
+    regional_costs = pd.DataFrame(regional_rows)
+   
+    return {
+        'crop_data': crop_data,
+        'cost_data': cost_data,
+        'regional_costs': regional_costs
+    }
+
+def load_wheat_data(file_path):
+    """Load wheat data from Excel file with specific data structure."""
+    full_path = os.path.join(os.path.dirname(__file__), file_path)
+    try:
+        df = pd.read_excel(full_path, header=None)
+       
+        # Dynamic extraction for yield, price, straw revenue
+        yield_value = None
+        price_value = None
+        straw_revenue = None
+        for row in df.itertuples():
+            if 'Yield' in str(row[1]):
+                yield_value = row[2]
+            if 'Price' in str(row[1]):
+                price_value = row[2]
+            if 'Straw revenue' in str(row[1]):
+                straw_revenue = row[2]
+       
+        if yield_value is None or price_value is None:
+            raise ValueError("Could not find yield or price in Excel")
+       
+        # Dynamic extraction for costs
+        cost_data = []
+        category = None
+        for row in df.itertuples():
+            cost_name = str(row[1]).strip()
+            if cost_name == 'Direct costs':
+                category = 'Direct Costs'
+                continue
+            if cost_name == 'Overhead costs':
+                category = 'Overhead Costs'
+                continue
+            if cost_name == '' or pd.isna(row[2]):
+                continue
+            cost_value = parse_dollar_value(row[2])
+            cost_data.append({
+                'Category': category,
+                'Cost_Item': cost_name,
+                'Cost_Value': cost_value
+            })
+       
+        cost_df = pd.DataFrame(cost_data)
+       
+        # Create crop data DataFrame
+        crop_df = pd.DataFrame({
+            'Crop': ['Wheat'],
+            'Yield': [yield_value],
+            'Price': [price_value],
+            'Straw_Revenue': [straw_revenue]
+        })
+       
+        # Create regional costs
+        regional_data = []
+        for _, cost_row in cost_df.iterrows():
+            base_cost = cost_row['Cost_Value']
+            regional_data.append({
+                'Region': 'Midwest',
+                'Cost_Item': cost_row['Cost_Item'],
+                'Cost_Value': base_cost
+            })
+            regional_data.append({
+                'Region': 'Great Plains',
+                'Cost_Item': cost_row['Cost_Item'],
+                'Cost_Value': base_cost * 0.95
+            })
+       
+        regional_df = pd.DataFrame(regional_data)
+       
+        result = {
+            'cost_data': cost_df,
+            'crop_data': crop_df,
+            'regional_costs': regional_df
+        }
+        return result
+       
+    except Exception as e:
+        st.error(f"Error loading wheat data: {e}")
+        return None
+
+def load_data(crop_type):
+    """Load data based on the selected crop type."""
+    if crop_type == "Corn":
+        return load_csv_data("attached_assets/AgriCommand2 Demo - Corn.csv")
+    elif crop_type == "Soybeans":
+        return load_excel_data("attached_assets/Beans.xlsx")
+    elif crop_type == "Wheat":
+        return load_wheat_data("attached_assets/Wheat_1753029874668.xlsx")
+    else:
+        return None
