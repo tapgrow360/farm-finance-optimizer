@@ -17,7 +17,7 @@ def load_excel_data(file_path):
     try:
         df = pd.read_excel(full_path, sheet_name='Sheet1')
         
-        # Extract basic information dynamically (search for keys)
+        # Dynamic extraction for yield and price
         yield_value = None
         price_value = None
         for row in df.itertuples():
@@ -28,8 +28,8 @@ def load_excel_data(file_path):
         
         if yield_value is None or price_value is None:
             raise ValueError("Could not find yield or price in Excel")
-
-        # Extract costs dynamically
+        
+        # Dynamic extraction for costs
         cost_data = []
         category = None
         for row in df.itertuples():
@@ -48,16 +48,16 @@ def load_excel_data(file_path):
                 'Cost_Item': cost_name,
                 'Cost_Value': cost_value
             })
-
+        
         cost_df = pd.DataFrame(cost_data)
-
+        
         # Create crop data DataFrame
         crop_df = pd.DataFrame({
             'Crop': ['Soybeans'],
             'Yield': [yield_value],
             'Price': [price_value]
         })
-
+        
         # Create regional costs
         regional_data = []
         for _, cost_row in cost_df.iterrows():
@@ -72,9 +72,9 @@ def load_excel_data(file_path):
                 'Cost_Item': cost_row['Cost_Item'],
                 'Cost_Value': base_cost * 0.95
             })
-
+        
         regional_df = pd.DataFrame(regional_data)
-
+        
         result = {
             'cost_data': cost_df,
             'crop_data': crop_df,
@@ -169,32 +169,3 @@ def load_csv_data(file_path):
             for name, value in overhead_costs.items():
                 modified_value = value * 0.95
                 regional_costs.append({'Region': region, 'Cost_Item': name, 'Cost_Value': modified_value})
-        
-        regional_costs_df = pd.DataFrame(regional_costs)
-        
-        additional_crops = [
-            {'Crop': 'Soybeans', 'Avg_Yield': 60, 'Current_Price': 13.50},
-            {'Crop': 'Wheat', 'Avg_Yield': 75, 'Current_Price': 7.00}
-        ]
-        
-        for crop in additional_crops:
-            crop_df = pd.concat([crop_df, pd.DataFrame([crop])], ignore_index=True)
-        
-        return {
-            'crop_data': crop_df,
-            'cost_data': cost_data,
-            'regional_costs': regional_costs_df
-        }
-        
-    except Exception as e:
-        st.error(f"Error loading CSV data: {str(e)}")
-        return create_fallback_data()
-
-def create_fallback_data():
-    # (Your original fallback code here - no changes needed)
-
-def load_wheat_data(file_path):
-    # (Your original load_wheat_data code here - update similarly if needed, with dynamic parsing)
-
-def load_data(crop_type):
-    # (Your original load_data code here - update paths with os.path.join if needed)
