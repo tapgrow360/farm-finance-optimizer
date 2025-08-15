@@ -80,7 +80,7 @@ def fetch_sheet_data(sheet_id):
     Fetch data from a Google Sheet using the sheet ID.
     
     This function will try different authentication methods:
-    1. First, try to use Streamlit's secrets mechanism
+    print('1. First, try to use Streamlit's secrets mechanism')
     2. If that fails, try to use local credentials (for development)
     3. If all fails, use public access (if the sheet is public)
     
