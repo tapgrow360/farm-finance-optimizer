@@ -347,7 +347,7 @@ def identify_optimization_areas(custom_costs, category_totals, current_profit):
 def generate_pdf_report(report_data):
     """
     Generate a PDF report based on the analysis data.
-    
+    from jinja2 import Template
     Args:
         report_data (dict): Dictionary containing the analysis data
         
