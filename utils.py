@@ -22,7 +22,7 @@ def create_fallback_data():
     
     
     
-    pass # Indented with 4 spaces
+   
     """Create sample data structure to use when Google Sheets access fails.
     This provides representative data for the application to function."""
     # Add your fallback code here if needed
