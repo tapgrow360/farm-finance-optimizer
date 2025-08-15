@@ -19,7 +19,8 @@ def create_fallback_data():
     # Add your fallback code here if needed
     pass
     
-  "rights"
+  def some_function():
+    "rights"  # Indented with 4 spaces
   def create_fallback_data():
     """dict: A dictionary containing sample dataframes for different categories"""
     pass  # Add your code here if needed
