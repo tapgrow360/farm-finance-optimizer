@@ -269,8 +269,14 @@ def identify_optimization_areas(custom_costs, category_totals, current_profit):
     for category, total in sorted_categories[:3]:  # Focus on top 3 categories
         percentage_of_total = total / filtered_total * 100 if filtered_total > 0 else 0
         
-        # Create category-specific optimization suggestions
-        if category == "Fertilizer":
+  optimization_areas["Fertilizer"] = {
+    "description": f"""
+    Fertilizer costs account for {percentage_of_total:.1f}% of your total input costs.
+    Consider soil testing to optimize application rates and potentially reduce costs
+    without impacting yield. Precision application technologies can also help
+    reduce waste and improve efficiency.
+    """
+}             if category == "Fertilizer":
             optimization_areas["Fertilizer"] = {
                 "description": f"""
                 "description": f"Fertilizer costs account for {percentage_of_total:.1f}% of your total input costs."
