@@ -9,7 +9,7 @@ import datetime
 import jinja2
 from reportlab.pdfgen import canvas
 import xlsxwriter
-
+from weasyprint import HTML
 def create_fallback_data():
     """
     Create sample data structure to use when Google Sheets access fails.
