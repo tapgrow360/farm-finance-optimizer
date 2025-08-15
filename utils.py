@@ -19,8 +19,10 @@ def create_fallback_data():
     # Add your fallback code here if needed
     pass
     
-    "Returns:"
-        dict: A dictionary containing sample dataframes for different categories
+  "rights"
+  def create_fallback_data():
+    """dict: A dictionary containing sample dataframes for different categories"""
+    pass  # Add your code here if needed
     """
     # Sample crop data
     crop_data = pd.DataFrame({
