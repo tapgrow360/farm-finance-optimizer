@@ -344,7 +344,11 @@ def identify_optimization_areas(custom_costs, category_totals, current_profit):
     return optimization_areas
 
 
-def generate_pdf_report(report_data):
+def generate_pdf(data):
+    with open('templates/report_template.html', 'r') as f:
+        template = Template(f.read())
+    html_content = template.render(crop_name=data['crop_name'], yield_value=data['yield_value'], price_value=data['price_value'], direct_costs=data['direct_costs'], overhead_costs=data['overhead_costs'], net_return=data['net_return'])
+    HTML(string=html_content).write_pdf('media/report.pdf')
     """
     Generate a PDF report based on the analysis data.
     from jinja2 import Template
