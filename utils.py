@@ -20,7 +20,7 @@ def your_function_name():
 
 
 from weasyprint import HTML
-    Create sample data structure to use when Google Sheets access fails.
+    """Create sample data structure to use when Google Sheets access fails.
     This provides representative data for the application to function.
     
     Returns:
