@@ -7,4 +7,4 @@ gspread
 reportlab
 xlsxwriter
 openpyxl
-jinja2
+weasyprint
