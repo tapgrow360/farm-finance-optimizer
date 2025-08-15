@@ -19,7 +19,7 @@ def create_fallback_data():
     # Add your fallback code here if needed
     pass
     
-    Returns:
+    "Returns:"
         dict: A dictionary containing sample dataframes for different categories
     """
     # Sample crop data
