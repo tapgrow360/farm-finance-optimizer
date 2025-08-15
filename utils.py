@@ -269,7 +269,7 @@ def identify_optimization_areas(custom_costs, category_totals, current_profit):
         if category == "Fertilizer":
             optimization_areas["Fertilizer"] = {
                 "description": f"""
-                Fertilizer costs account for {percentage_of_total:.1f}% of your total input costs.
+                "description": f"Fertilizer costs account for {percentage_of_total:.1f}% of your total input costs."
                 Consider soil testing to optimize application rates and potentially reduce costs
                 without impacting yield. Precision application technologies can also help
                 reduce waste and improve efficiency.
