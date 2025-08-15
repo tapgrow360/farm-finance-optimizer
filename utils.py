@@ -13,15 +13,11 @@ import xlsxwriter
 from reportlab.pdfgen import canvas  # Example
 import xlsxwriter  # Example
 from weasyprint import HTML  # New line
-def your_function_name():
-    pass  # Add this to fix the empty function
-
-
-
-
-from weasyprint import HTML
-    """Create sample data structure to use when Google Sheets access fails."""
-    This provides representative data for the application to function.
+def create_fallback_data():
+    """Create sample data structure to use when Google Sheets access fails.
+    This provides representative data for the application to function."""
+    # Add your fallback code here if needed
+    pass
     
     Returns:
         dict: A dictionary containing sample dataframes for different categories
