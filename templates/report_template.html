@@ -1,0 +1,21 @@
+<html>
+<body>
+<h1>Farm Finance Report</h1>
+<p>Crop: {{ crop_name }}</p>
+<p>Yield: {{ yield_value }}</p>
+<p>Price: {{ price_value }}</p>
+<h2>Direct Costs</h2>
+<table>
+{% for cost in direct_costs %}
+<tr><td>{{ cost.Cost_Item }}</td><td>{{ cost.Cost_Value }}</td></tr>
+{% endfor %}
+</table>
+<h2>Overhead Costs</h2>
+<table>
+{% for cost in overhead_costs %}
+<tr><td>{{ cost.Cost_Item }}</td><td>{{ cost.Cost_Value }}</td></tr>
+{% endfor %}
+</table>
+<p>Net Return: {{ net_return }}</p>
+</body>
+</html>
