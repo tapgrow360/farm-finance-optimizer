@@ -277,7 +277,7 @@ def identify_optimization_areas(custom_costs, category_totals, current_profit):
             }
         elif category == "Seed":
             optimization_areas["Seed"] = {
-                "description": f"""
+                "description": f"Seed costs represent {percentage_of_total:.1f}% of your total input costs."
                 Seed costs represent {percentage_of_total:.1f}% of your total input costs.
                 Evaluate if premium seed varieties are delivering adequate yield increases
                 to justify their cost. Consider conducting small test plots to compare
