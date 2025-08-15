@@ -14,7 +14,7 @@ from reportlab.pdfgen import canvas  # Example
 import xlsxwriter  # Example
 from weasyprint import HTML  # New line
 def create_fallback_data():
-    """
+from weasyprint import HTML
     Create sample data structure to use when Google Sheets access fails.
     This provides representative data for the application to function.
     
