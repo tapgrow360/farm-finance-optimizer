@@ -75,3 +75,28 @@ def calculate_profit_per_acre(yield_per_acre, price_per_unit, total_costs_per_ac
     revenue_per_acre = yield_per_acre * price_per_unit
     profit_per_acre = revenue_per_acre - total_costs_per_acre
     return profit_per_acre
+    def identify_optimization_areas(total_input_costs, fertilizer_cost, seed_cost, chemical_cost):
+    """Identify areas for cost optimization in farming.
+    
+    Parameters:
+    - total_input_costs: Total costs for inputs (float).
+    - fertilizer_cost: Cost for fertilizer (float).
+    - seed_cost: Cost for seed (float).
+    - chemical_cost: Cost for chemicals (float).
+    
+    Returns:
+    Dict with optimization suggestions.
+    """
+    optimization_areas = {}
+    if total_input_costs > 0:
+        fertilizer_percent = (fertilizer_cost / total_input_costs) * 100
+        seed_percent = (seed_cost / total_input_costs) * 100
+        chemical_percent = (chemical_cost / total_input_costs) * 100
+        
+        optimization_areas["Fertilizer"] = f"Fertilizer costs are {fertilizer_percent:.1f}% of total. Consider soil testing to reduce by 10-20%."
+        optimization_areas["Seed"] = f"Seed costs are {seed_percent:.1f}% of total. Look for high-yield varieties to optimize."
+        optimization_areas["Chemical"] = f"Chemical costs are {chemical_percent:.1f}% of total. Use precision application to minimize waste."
+    else:
+        optimization_areas["Error"] = "Total input costs must be greater than 0."
+    
+    return optimization_areas
