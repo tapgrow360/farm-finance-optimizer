@@ -47,17 +47,24 @@ def load_data():
 # Apply custom CSS (simplified to avoid errors)
 st.markdown("""
 <style>
-/* Basic mobile optimization */
-.main .block-container {
-    padding: 1rem;
-    max-width: 100%;
-}
-</style>
-""", unsafe_allow_html=True)
+st.markdown("""
+<style>
+    /* Basic mobile optimization */
+    .main .block-container {
+        padding: 1rem;
+        max-width: 100%;
+    }
+    /* Additional rules (e.g., for layout or image scaling) */
+    .stApp {  # Adjust selector as needed, e.g., for main app width
         max-width: 70% !important;
+    }
+    img {  # Example selector for images; customize if targeting specific elements
         width: 180px !important;
         height: auto !important;
         transform: scale(0.6) !important;
+    }
+</style>
+""", unsafe_allow_html=True)
         transform-origin: center top !important;
         margin-top: -55px !important;  /* Pushed even higher */
         margin-bottom: -60px !important; /* Further increased negative margin to remove gap */
