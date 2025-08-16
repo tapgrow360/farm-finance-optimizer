@@ -4,40 +4,6 @@ import plotly.express as px
 import plotly.graph_objects as go
 import numpy as np
 import os
-
-def load_data():
-    """Load the CSV data"""
-    try:
-        return pd.read_csv("attached_assets/AgriCommand2 Demo - Corn.csv")
-    except FileNotFoundError:
-        st.error("Demo data file not found. Using sample data.")
-        # Return sample data so app still works
-        return pd.DataFrame({
-            'Crop': ['Corn'],
-            'Region': ['Midwest'], 
-            'Acres': [100],
-            'Yield': [150]
-        })
-
-# Later in your code, when you actually need the data:
-if st.button("Load Data") or 'df' not in st.session_state:
-    st.session_state.df = load_data()
-# Better CSV loading with error handling
-csv_path = "attached_assets/AgriCommand2 Demo - Corn.csv"
-
-try:
-    if os.path.exists(csv_path):
-        df = pd.read_csv(csv_path)
-        st.success("Data loaded successfully!")
-    else:
-        # Try alternative path
-        alt_path = "./attached_assets/AgriCommand2 Demo - Corn.csv"
-        df = pd.read_csv(alt_path)
-        st.success("Data loaded successfully!")
-except Exception as e:
-    st.error(f"Could not load CSV file: {e}")
-    # Create dummy data so app still works
-    df = pd.DataFrame({"crop": ["Corn"], "acres": [100], "yield": [150]})
 import base64
 from utils import (
     calculate_profit_per_acre, 
@@ -62,22 +28,28 @@ st.markdown("""
     <meta name="mobile-web-app-capable" content="yes">
 """, unsafe_allow_html=True)
 
-# Apply custom CSS for a cleaner, sharper interface
+def load_data():
+    """Load the CSV data"""
+    try:
+        return pd.read_csv("attached_assets/AgriCommand2 Demo - Corn.csv")
+    except FileNotFoundError:
+        try:
+            # Try alternative path
+            alt_path = "AgriCommand2 Demo - Corn.csv"
+            df = pd.read_csv(alt_path)
+            st.success("Data loaded successfully!")
+            return df
+        except Exception as e:
+            st.error(f"Could not load CSV file: {e}")
+            # Create dummy data so app still works
+            return pd.DataFrame({"crop": ["Corn"], "acres": [100], "yield": [150]})
+
+# Apply custom CSS
 try:
     with open('.streamlit/style.css') as f:
         st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 except Exception as e:
     st.error(f"Could not load CSS: {e}")
-    # Apply some emergency inline CSS for extreme mobile optimization
-    st.markdown("""
-    <style>
-    /* Emergency mobile CSS */
-    @media screen and (max-width: 375px) {
-        .main .block-container {
-            padding: 0.3rem !important;
-            max-width: 95% !important;
-        }
-        h1, h2, h3, h4, h5, h6 {
             font-size: 80% !important;
             margin: 0.2rem 0 !important;
         }
