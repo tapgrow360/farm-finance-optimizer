@@ -215,8 +215,9 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Sidebar for navigation and inputs
-# Add small logo in sidebar
-small_logo_base64 = ""  # Logo disabled temporarily
+# Display logo above Crop Inputs
+st.image("Transparent Logo_1754603989198.png", width=600)
+st.header("Crop Inputs")
 st.sidebar.markdown(f"""
 <div style="text-align: center; margin-bottom: 10px;">
     <img src="data:image/png;base64,{small_logo_base64}" 
