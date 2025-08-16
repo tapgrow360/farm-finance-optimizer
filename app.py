@@ -4,21 +4,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 import numpy as np
 import os
-import os
-st.image("Original Logo_1754603028196.png", width=300, caption="TEST LOGO")
-def load_data():
-    """Load the CSV data"""
-    try:
-        return pd.read_csv("attached_assets/AgriCommand2 Demo - Corn.csv")
-    except FileNotFoundError:
-        st.error("Demo data file not found. Using sample data.")
-        # Return sample data so app still works
-        return pd.DataFrame({
-            'Crop': ['Corn'],
-            'Region': ['Midwest'], 
-            'Acres': [100],
-            'Yield': [150]
-        })
+
 def load_data():
     """Load the CSV data"""
     try:
