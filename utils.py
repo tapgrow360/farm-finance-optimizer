@@ -139,7 +139,7 @@ def identify_optimization_areas(total_input_costs, fertilizer_cost, seed_cost, c
     }
     return optimization_areas
     def identify_optimization_areas(total_input_costs, fertilizer_cost, seed_cost, chemical_cost):
-    """Identify areas for cost optimization in farming."""
+        """Identify areas for cost optimization in farming."""
     optimization_areas = {}
     percentage_of_total = (fertilizer_cost / total_input_costs) * 100 if total_input_costs > 0 else 0
     optimization_areas["Fertilizer"] = f"Fertilizer costs account for {percentage_of_total:.1f}% of your total input costs. Consider soil testing to optimize application rates and potentially reduce costs without impacting yield. Precision application technologies can also help reduce waste and improve efficiency."
