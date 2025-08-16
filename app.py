@@ -5,26 +5,7 @@ import plotly.graph_objects as go
 import numpy as np
 import os
 import os
-st.write("Current directory:", os.getcwd())
-st.write("Files in current directory:", os.listdir("."))
-
-# Check if assets folder exists
-if os.path.exists("assets"):
-    st.write("Files in assets folder:", os.listdir("assets"))
-else:
-    st.write("Assets folder not found")
-
-# Check if attached_assets folder exists (since your CSV is there)
-if os.path.exists("attached_assets"):
-    st.write("Files in attached_assets folder:", os.listdir("attached_assets"))
-    
-# Check a few other common locations
-for folder in [".", "src", "static", "images"]:
-    if os.path.exists(folder):
-        files = os.listdir(folder)
-        png_files = [f for f in files if f.endswith('.png')]
-        if png_files:
-            st.write(f"PNG files in {folder}:", png_files)
+st.image("Original Logo_1754603028196.png", width=300, caption="TEST LOGO")
 def load_data():
     """Load the CSV data"""
     try:
