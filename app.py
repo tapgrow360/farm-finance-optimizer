@@ -4,7 +4,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 import numpy as np
 import os
-
+st.image("assets/Original Logo_1754603028196.png", width=300, caption="TEST LOGO")
 # Display logo at the top of the page
 try:
     st.image("assets/Original Logo_1754603028196.png", width=400)
