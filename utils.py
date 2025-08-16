@@ -17,13 +17,9 @@ def create_fallback_data():
 
 
 
-    def some_function():
-    
-    
-    
-    
-   
-    """Create sample data structure to use when Google Sheets access fails.
+def create_fallback_data():
+    """Create sample data structure to use when Google Sheets access fails."""
+    pass
     This provides representative data for the application to function."""
     # Add your fallback code here if needed
     pass
