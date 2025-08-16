@@ -146,7 +146,7 @@ def identify_optimization_areas(total_input_costs, fertilizer_cost, seed_cost, c
     # Add similar for seed and chemical if needed
     return optimization_areas
     def generate_pdf_report():
-    """Generate a PDF report for farming analysis."""
+        """Generate a PDF report for farming analysis."""
     # TODO: Implement PDF generation logic
     # This function will create a PDF report with farming data analysis
     pass
