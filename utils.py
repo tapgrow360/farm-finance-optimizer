@@ -14,15 +14,38 @@ from reportlab.pdfgen import canvas  # Example
 import xlsxwriter  # Example
 from weasyprint import HTML  # New line
 def create_fallback_data():
-
-
-
-def create_fallback_data():
-    """Create sample data structure to use when Google Sheets access fails."""
-    pass
+    """Create sample data structure to use when Google Sheets access fails.
     This provides representative data for the application to function."""
-    # Add your fallback code here if needed
-    pass
+    # Sample crop data
+    crop_data = pd.DataFrame({
+        'Crop': ['Corn', 'Soybeans', 'Wheat'],
+        'Avg_Yield': [180, 60, 75],
+        'Current_Price': [4.25, 13.50, 7.00]
+    })
+    # Sample cost categories
+    cost_data = pd.DataFrame({
+        'Category': ['Direct Costs'] * 9 + ['Overhead Costs'] * 5,
+        'Item': ['Rent', 'Seed', 'Fertilizer', 'Chemical', 'Insurance', 'Drying', 'Fuel', 'Repairs', 'Interest', 'Depreciation', 'Utilities', 'Misc overhead', 'Labor', 'Management']
+    })
+    # Sample regional cost data
+    regions = ['Midwest', 'Great Plains']
+    cost_items = cost_data['Item'].tolist()
+    regional_rows = []
+    for region in regions:
+        for item in cost_items:
+            base_cost = 25.0  # Sample value
+            cost = base_cost if region == 'Midwest' else base_cost * 0.95
+            regional_rows.append({
+                'Region': region,
+                'Cost_Item': item,
+                'Cost_Value': cost
+            })
+    regional_costs = pd.DataFrame(regional_rows)
+    return {
+        'crop_data': crop_data,
+        'cost_data': cost_data,
+        'regional_costs': regional_costs
+    }
     
   def some_function():
     "rights"  # Indented with 4 spaces
