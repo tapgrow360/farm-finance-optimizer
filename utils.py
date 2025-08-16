@@ -21,7 +21,7 @@ def create_fallback_data():
     """Create sample data structure to use when Google Sheets access fails.
     This provides representative data for the application to function."""
     # Sample crop data
-    def create_fallback_data():
+   def create_fallback_data():
     """Create sample data structure to use when Google Sheets access fails."""
     pass
     cost_data = pd.DataFrame({
