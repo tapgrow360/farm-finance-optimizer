@@ -61,3 +61,17 @@ def some_other_function():
     pass
 
 # (Rest of your code from utils.py goes here, but make sure all def lines have at least 'pass' indented under them)
+def calculate_profit_per_acre(yield_per_acre, price_per_unit, total_costs_per_acre):
+    """Calculate profit per acre for farming.
+    
+    Parameters:
+    - yield_per_acre: Number of units produced per acre (e.g., bushels of corn).
+    - price_per_unit: Price per unit (e.g., $ per bushel).
+    - total_costs_per_acre: Total costs per acre (e.g., seed, fertilizer, rent).
+    
+    Returns:
+    Profit per acre as a float.
+    """
+    revenue_per_acre = yield_per_acre * price_per_unit
+    profit_per_acre = revenue_per_acre - total_costs_per_acre
+    return profit_per_acre
