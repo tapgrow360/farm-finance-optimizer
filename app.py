@@ -4,14 +4,33 @@ import plotly.express as px
 import plotly.graph_objects as go
 import numpy as np
 import os
-import streamlit as st
-import pandas as pd
-import pandas as pd
-import streamlit as st
-import pandas as pd
 
-# Your other imports here...
+# Display logo at the top of the page
+try:
+    st.image("assets/Original Logo_1754603028196.png", width=400)
+except:
+    st.title("TapGrow 360")  # fallback if image doesn't load
 
+# Display smaller logo in sidebar
+try:
+    st.sidebar.image("assets/Original Logo_1754603028196.png", width=200)
+except:
+    st.sidebar.title("TapGrow 360")  # fallback if image doesn't load
+
+# Rest of your existing code continues below...
+def load_data():
+    """Load the CSV data"""
+    try:
+        return pd.read_csv("attached_assets/AgriCommand2 Demo - Corn.csv")
+    except FileNotFoundError:
+        st.error("Demo data file not found. Using sample data.")
+        # Return sample data so app still works
+        return pd.DataFrame({
+            'Crop': ['Corn'],
+            'Region': ['Midwest'], 
+            'Acres': [100],
+            'Yield': [150]
+        })
 def load_data():
     """Load the CSV data"""
     try:
