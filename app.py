@@ -741,7 +741,12 @@ st.markdown("""
 st.plotly_chart(fig_bar, use_container_width=True)
 
 # Calculate optimization data but don't display general optimization section
-optimization_results = identify_optimization_areas(custom_costs, category_totals, profit_per_acre)
+# Extract individual cost components
+fertilizer_cost = category_totals.get('Fertilizer', 0)
+seed_cost = category_totals.get('Seed', 0)
+chemical_cost = category_totals.get('Chemicals', 0)
+
+optimization_results = identify_optimization_areas(custom_costs, fertilizer_cost, seed_cost, chemical_cost)
 
 # Create dedicated sections for each of the top 4 direct costs
 # Add a less prominent divider with minimal spacing
