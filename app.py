@@ -4,20 +4,27 @@ import plotly.express as px
 import plotly.graph_objects as go
 import numpy as np
 import os
-st.image("assets/Original Logo_1754603028196.png", width=300, caption="TEST LOGO")
-# Display logo at the top of the page
-try:
-    st.image("assets/Original Logo_1754603028196.png", width=400)
-except:
-    st.title("TapGrow 360")  # fallback if image doesn't load
+import os
+st.write("Current directory:", os.getcwd())
+st.write("Files in current directory:", os.listdir("."))
 
-# Display smaller logo in sidebar
-try:
-    st.sidebar.image("assets/Original Logo_1754603028196.png", width=200)
-except:
-    st.sidebar.title("TapGrow 360")  # fallback if image doesn't load
+# Check if assets folder exists
+if os.path.exists("assets"):
+    st.write("Files in assets folder:", os.listdir("assets"))
+else:
+    st.write("Assets folder not found")
 
-# Rest of your existing code continues below...
+# Check if attached_assets folder exists (since your CSV is there)
+if os.path.exists("attached_assets"):
+    st.write("Files in attached_assets folder:", os.listdir("attached_assets"))
+    
+# Check a few other common locations
+for folder in [".", "src", "static", "images"]:
+    if os.path.exists(folder):
+        files = os.listdir(folder)
+        png_files = [f for f in files if f.endswith('.png')]
+        if png_files:
+            st.write(f"PNG files in {folder}:", png_files)
 def load_data():
     """Load the CSV data"""
     try:
