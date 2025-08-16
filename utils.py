@@ -146,14 +146,16 @@ def identify_optimization_areas(total_input_costs, fertilizer_cost, seed_cost, c
     # Add similar for seed and chemical if needed
     return optimization_areas
 
-def generate_pdf_report():
+def generate_pdf_report(data):
     """Generate a PDF report for farming analysis."""
     # TODO: Implement PDF generation logic
     # This function will create a PDF report with farming data analysis
-    pass
+    # For now, return a placeholder message
+    return "PDF report generation not yet implemented"
 
-def generate_excel_report():
+def generate_excel_report(data):
     """Generate an Excel report for farming analysis."""
     # TODO: Implement Excel generation logic  
-    # This function will create a PDF report with farming data analysis
-    pass
+    # This function will create an Excel report with farming data analysis
+    # For now, return a placeholder message
+    return "Excel report generation not yet implemented"
