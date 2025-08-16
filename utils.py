@@ -123,7 +123,7 @@ def calculate_profit_per_acre(yield_per_acre, price_per_unit, total_costs_per_ac
     # Add more areas if needed
     return optimization_areas
     def identify_optimization_areas(total_input_costs, fertilizer_cost, seed_cost, chemical_cost):
-    """Identify areas for cost optimization in farming."""
+    """Identify areas for cost optimization in farming.""" pass
     optimization_areas = {}
     percentage_of_total = (fertilizer_cost / total_input_costs) * 100 if total_input_costs > 0 else 0
     optimization_areas["Fertilizer"] = f"Fertilizer costs account for {percentage_of_total:.1f}% of your total input costs."
