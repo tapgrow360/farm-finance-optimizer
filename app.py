@@ -44,40 +44,16 @@ def load_data():
             # Create dummy data so app still works
             return pd.DataFrame({"crop": ["Corn"], "acres": [100], "yield": [150]})
 
-# Apply custom CSS
-try:
-    with open('.streamlit/style.css') as f:
-        st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
-except Exception as e:
-    st.error(f"Could not load CSS: {e}")
-            font-size: 80% !important;
-            margin: 0.2rem 0 !important;
-        }
-        p, div {
-            font-size: 70% !important;
-        }
-        [data-testid="stSidebar"] {
-            width: 150px !important;
-        }
-        .logo-container img {
-            max-width: 60% !important;
-        }
-    }
-    </style>
-    """, unsafe_allow_html=True)
-
-# Removed the INPUTS button as requested
-# Always keep the sidebar expanded
-if 'sidebar_state' not in st.session_state:
-    st.session_state.sidebar_state = 'expanded'
-
-# Display responsive logo - using HTML for better mobile responsiveness
-# First add the responsive logo styles
+# Apply custom CSS (simplified to avoid errors)
 st.markdown("""
 <style>
-/* Ultra-responsive logo for tiny screens */
-@media screen and (max-width: 375px) {
-    .logo-container img {
+/* Basic mobile optimization */
+.main .block-container {
+    padding: 1rem;
+    max-width: 100%;
+}
+</style>
+""", unsafe_allow_html=True)
         max-width: 70% !important;
         width: 180px !important;
         height: auto !important;
