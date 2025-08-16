@@ -122,3 +122,15 @@ def calculate_profit_per_acre(yield_per_acre, price_per_unit, total_costs_per_ac
     }
     # Add more areas if needed
     return optimization_areas
+    def identify_optimization_areas(percentage_of_total):
+    """Identify areas for cost optimization in farming."""
+    optimization_areas = {}
+    optimization_areas["Fertilizer"] = {
+        "description": f"""
+        Fertilizer costs account for {percentage_of_total:.1f}% of your total input costs.
+        Consider soil testing to optimize application rates and potentially reduce costs
+        without impacting yield. Precision application technologies can also help
+        reduce waste and improve efficiency.
+        """
+    }
+    return optimization_areas
