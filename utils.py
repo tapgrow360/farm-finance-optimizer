@@ -17,12 +17,9 @@ def create_fallback_data():
     """Create sample data structure to use when Google Sheets access fails.
     This provides representative data for the application to function."""
     # Sample crop data
-    crop_data = pd.DataFrame({
-        'Crop': ['Corn', 'Soybeans', 'Wheat'],
-        'Avg_Yield': [180, 60, 75],
-        'Current_Price': [4.25, 13.50, 7.00]
-    })
-    # Sample cost categories
+    def create_fallback_data():
+    """Create sample data structure to use when Google Sheets access fails."""
+    pass
     cost_data = pd.DataFrame({
         'Category': ['Direct Costs'] * 9 + ['Overhead Costs'] * 5,
         'Item': ['Rent', 'Seed', 'Fertilizer', 'Chemical', 'Insurance', 'Drying', 'Fuel', 'Repairs', 'Interest', 'Depreciation', 'Utilities', 'Misc overhead', 'Labor', 'Management']
